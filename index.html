@@ -53,8 +53,8 @@ select{padding:8px 14px;border:1px solid var(--border);border-radius:8px;font-si
 .bar-row .fill.neg{background:linear-gradient(90deg,#c76e6e,var(--red))}
 .bar-row .val{width:110px;font-size:12.5px;font-weight:600;color:var(--navy);flex-shrink:0}
 .analysis{background:var(--xlblue);border-left:4px solid var(--blue);border-radius:0 8px 8px 0;padding:16px 20px;margin-top:22px}
-.analysis h3{color:var(--navy);font-size:14px;margin-bottom:8px}
-.analysis li{margin:6px 0 6px 18px;font-size:13px;line-height:1.5}
+.analysis h3{color:var(--navy);font-size:17px;margin-bottom:8px}
+.analysis li{margin:8px 0 8px 18px;font-size:15px;line-height:1.6}
 .scroll{overflow-x:auto;border:1px solid var(--border);border-radius:8px}
 .scroll table{margin:0}
 footer{padding:18px 36px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:30px}
@@ -67,6 +67,7 @@ footer{padding:18px 36px;color:var(--muted);font-size:12px;border-top:1px solid 
  .cards{grid-template-columns:1fr 1fr;gap:8px}.card{padding:10px 12px}.card .v{font-size:17px}
  th,td{padding:6px 7px;font-size:12px}
  .bar-row .lbl{width:88px;font-size:11px}.bar-row .val{width:88px;font-size:11px}
+ .analysis li{font-size:13.5px}
  footer{padding:14px}
 }
 @media print{nav{display:none}.page{display:block!important;page-break-after:always}}
@@ -76,12 +77,12 @@ footer{padding:18px 36px;color:var(--muted);font-size:12px;border-top:1px solid 
 <header>
   <div class="org">Azərbaycan Həmkarlar İttifaqları Konfederasiyası</div>
   <h1>«Kurort» QSC və tabeliyindəki sanatoriyaların maliyyə hesabatı</h1>
-  <div class="sub" id="hdr-sub">Gəlir, xərc və əməliyyat nəticəsi (AZN)</div>
+  <div class="sub" id="hdr-sub">Gəlir, xərc və maliyyə nəticələri (AZN)</div>
 </header>
 <nav id="nav">
   <button data-p="icmal" class="active">İcmal</button>
   <button data-p="dinamika">Aylıq dinamika</button>
-  <button data-p="sanatoriyaler">Sanatoriyalər üzrə</button>
+  <button data-p="obyektler">Sanatoriyalar üzrə xalis mənfəət</button>
   <button data-p="xerc">Xərc strukturu</button>
   <button data-p="detal">Sanatoriya detalları</button>
   <button data-p="stat">Statistika</button>
@@ -90,10 +91,10 @@ footer{padding:18px 36px;color:var(--muted);font-size:12px;border-top:1px solid 
 
 <section class="page show" id="p-icmal">
   <h2>İcmal göstəricilər</h2>
-  <div class="note">Bütün sanatoriyalər üzrə konsolidə edilmiş illik nəticələr</div>
+  <div class="note">Bütün sanatoriyalar üzrə konsolidə edilmiş illik nəticələr</div>
   <div class="cards" id="kpi"></div>
   <div class="scroll"><table id="t-icmal"></table></div>
-  <div class="bars" id="bars-netice"><h2 style="font-size:15px;margin:18px 0 8px">Sanatoriyalər üzrə əməliyyat nəticəsi</h2></div>
+  <div class="bars" id="bars-netice"><h2 style="font-size:16px;margin:18px 0 8px">Sanatoriyalar üzrə xalis mənfəət</h2></div>
   <div class="analysis">
     <h3>Analitik qeydlər</h3>
     <ul id="notes"></ul>
@@ -101,23 +102,24 @@ footer{padding:18px 36px;color:var(--muted);font-size:12px;border-top:1px solid 
 </section>
 
 <section class="page" id="p-dinamika">
-  <h2>Konsolidə aylıq dinamika</h2>
-  <div class="note">Bütün sanatoriyalər üzrə cəmlənmiş aylıq göstəricilər</div>
+  <h2>Aylıq dinamika</h2>
+  <div class="note">Seçilmiş sanatoriya (və ya hamısı) üzrə aylıq göstəricilər</div>
+  <div class="controls"><label>Sanatoriya seçin:</label><select id="sel-din"></select></div>
   <div class="scroll"><table id="t-dinamika"></table></div>
   <div id="spark"></div>
 </section>
 
-<section class="page" id="p-sanatoriyaler">
-  <h2>Sanatoriyalər üzrə aylıq əməliyyat nəticəsi</h2>
-  <div class="note">Gəlir − Xərc, aylar üzrə. Mənfi nəticələr qırmızı göstərilir.</div>
-  <div class="scroll"><table id="t-sanatoriyaler"></table></div>
+<section class="page" id="p-obyektler">
+  <h2>Sanatoriyalar üzrə aylıq xalis mənfəət</h2>
+  <div class="note">Xalis mənfəət, aylar üzrə. Mənfi nəticələr qırmızı göstərilir.</div>
+  <div class="scroll"><table id="t-obyektler"></table></div>
 </section>
 
 <section class="page" id="p-xerc">
   <h2>Xərclərin strukturu</h2>
-  <div class="note">Sanatoriyalər üzrə illik xərc maddələri və konsolidə xüsusi çəkilər</div>
+  <div class="note">Əməliyyat və inzibati xərclər, alt maddələr üzrə illik məbləğlər</div>
   <div class="scroll"><table id="t-xerc"></table></div>
-  <div class="bars" id="bars-xerc"><h2 style="font-size:15px;margin:18px 0 8px">Konsolidə xərc strukturu</h2></div>
+  <div class="bars" id="bars-xerc"><h2 style="font-size:16px;margin:18px 0 8px">Konsolidə xərc maddələri</h2></div>
 </section>
 
 <section class="page" id="p-detal">
@@ -125,7 +127,7 @@ footer{padding:18px 36px;color:var(--muted);font-size:12px;border-top:1px solid 
   <div class="controls">
     <label>Sanatoriya seçin:</label>
     <select id="sel-obj"></select>
-    <label style="margin-left:10px"><input type="checkbox" id="chk-zero"> sıfır sətirləri göstər</label>
+    
   </div>
   <div class="cards" id="detal-kpi"></div>
   <div class="scroll"><table id="t-detal"></table></div>
@@ -133,8 +135,9 @@ footer{padding:18px 36px;color:var(--muted);font-size:12px;border-top:1px solid 
 
 
 <section class="page" id="p-stat">
-  <h2>Statistik göstəricilər <span class="tag" id="stat-year"></span></h2>
-  <div class="note">Doluluq, istirahətçi sayı və adam başına maya dəyəri (aylıq xərc ÷ istirahətçi sayı). Mənbə: «Statistika» vərəqi.</div>
+  <h2>Statistik göstəricilər <span class="tag" id="stat-tag"></span></h2>
+  <div class="note">Doluluq, qonaq sayı, orta qiymətlər və vahid başına göstəricilər</div>
+  <div class="controls"><label>Sanatoriya seçin:</label><select id="sel-stat"></select></div>
   <div id="stat-content"></div>
 </section>
 
@@ -142,16 +145,63 @@ footer{padding:18px 36px;color:var(--muted);font-size:12px;border-top:1px solid 
 <footer>Mənbə: Kurort 2025.xlsx · Hesabat tarixi: 08.07.2026 · Məbləğlər Azərbaycan manatı (AZN) ilə. Mənfəət vergisi mənbə məlumatında hesablanmadığından nəticələr əməliyyat nəticəsi kimi təqdim olunur.</footer>
 
 <script>
-// ======= CANLI DATA + İL SEÇİMİ + STATİSTİKA =======
 const API_URL='https://script.google.com/macros/s/AKfycbyJFLrx94DjmXhUqX72p6VB8FYd-rU-aCE4978bYFSxPk-TrRJuxEv-9eg-BKxw1Dz7Gw/exec';
-const DEFAULT_YEAR='2025';
-let BY_YEAR={}, STATS={}, YEARS=[], MAIN_TEMPLATE='';
-const sumA=a=>a.reduce((x,y)=>x+y,0);
-const fmtN=v=>v==null?'—':Math.round(v).toLocaleString('az-AZ').replace(/,/g,' ');
-const clsN=v=>v<0?' class="neg"':(v>0?' class="pos"':'');
+const MONTHS=['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'];
+const SKIP_COLS=['ümumi','forecast','%'];
+let BY_YEAR={}, YEARS=[], MAIN_TEMPLATE='';
+const sum=a=>a.reduce((x,y)=>x+y,0);
+const num=v=>{const x=typeof v==='number'?v:parseFloat(String(v).replace(/\s|\u00a0/g,'').replace(',','.'));return isNaN(x)?0:x;};
+const fmt=v=>v==null?'—':Math.round(v).toLocaleString('az-AZ').replace(/,/g,' ');
+const fp=(v,d)=>((Math.abs(v)<=1.5?v*100:v).toFixed(d==null?1:d))+'%';
+const cls=v=>v<0?' class="neg"':(v>0?' class="pos"':'');
 const pct=(a,b)=>a?((100*(b-a)/Math.abs(a)).toFixed(1)+'%'):'—';
 const pctCls=(a,b)=>(b-a)<0?' class="neg"':((b-a)>0?' class="pos"':'');
-const getR=(o,c)=>{const r=o.rows.find(r=>r.c===c);return r?r.m:Array(12).fill(0)};
+const isPct=l=>l.includes('%');
+
+// Vərəq matrisini sanatoriyalara ayır
+function parseSheet(values){
+  const r1=values[0]||[], r2=values[1]||[];
+  const sans={}, order=[];
+  for(let j=1;j<r1.length;j++){
+    const sn=String(r1[j]||'').trim(), mon=String(r2[j]||'').trim();
+    const mi=MONTHS.indexOf(mon);
+    if(!sn||mi<0||SKIP_COLS.includes(sn.toLowerCase()))continue;
+    if(!sans[sn]){sans[sn]={name:sn,rows:[],idx:{}};order.push(sn);}
+    sans[sn].cols=sans[sn].cols||{};
+    sans[sn].cols[mi]=sans[sn].cols[mi]||[];
+    sans[sn].cols[mi].push(j);
+  }
+  order.forEach(sn=>{
+    const S=sans[sn];
+    for(let i=2;i<values.length;i++){
+      const lab=String(values[i][0]||'').trim();
+      if(!lab)continue;
+      const m=Array(12).fill(0);
+      for(let mi=0;mi<12;mi++)
+        (S.cols[mi]||[]).forEach(j=>m[mi]+=num(values[i][j]));
+      S.rows.push({l:lab,m:m});
+      if(!(lab in S.idx))S.idx[lab]=S.rows.length-1;
+    }
+    delete S.cols;
+  });
+  return order.map(sn=>sans[sn]);
+}
+// köməkçilər
+const R=(S,lab)=>{const i=S.idx[lab];return i==null?Array(12).fill(0):S.rows[i].m;};
+const Rpre=(S,pre)=>{const r=S.rows.find(r=>r.l.startsWith(pre)&&!r.l.includes('%'));return r?r.m:Array(12).fill(0);};
+const secRows=(S,head,stops)=>{ // bölmə altındakı maddələr
+  const i=S.idx[head];if(i==null)return[];
+  const out=[];
+  for(let k=i+1;k<S.rows.length;k++){
+    const l=S.rows[k].l;
+    if(stops.some(s=>l.startsWith(s)))break;
+    out.push(S.rows[k]);
+  }
+  return out;
+};
+const STOPS=['SATIŞ','ƏMƏLİYYAT XƏRCLƏRİ','Əməliyyat gəliri','İNZİBATİ XƏRCLƏR','DƏQİQLƏŞDİRİLMİŞ','Amortizasiya','FAİZ','Bonus','Mənfəət vergisi','XALİS','STATISTIKA'];
+const K={sat:'SATIŞ',emx:'ƏMƏLİYYAT XƏRCLƏRİ',emg:'Əməliyyat gəliri',inz:'İNZİBATİ XƏRCLƏR',
+  amort:'Amortizasiya',ebit:'FAİZ VƏ VERGİLƏRDƏN ƏVVƏL MƏNFƏƏT',bonus:'Bonus',vergi:'Mənfəət vergisi',xalis:'XALİS MƏNFƏƏT'};
 
 async function loadSheets(){
   const box=document.getElementById('loadbox');
@@ -159,34 +209,19 @@ async function loadSheets(){
     const resp=await fetch(API_URL,{redirect:'follow'});
     if(!resp.ok)throw new Error('Sorğu alınmadı (HTTP '+resp.status+')');
     const ALL=await resp.json();
-    if(!Array.isArray(ALL)||!ALL.length)throw new Error('Cədvəldə gözlənilən strukturda data tapılmadı');
-    BY_YEAR={};STATS={};
-    ALL.forEach(o=>{
-      const nm=o.name.trim();
-      const m=nm.match(/^(.*?)[\s_-]+((?:19|20)\d{2})\s*$/);
-      const year=m?m[2]:DEFAULT_YEAR;
-      const base=m?m[1].trim():nm;
-      if(/^statistika/i.test(base)||/^statistika/i.test(nm)){
-        const st=STATS[year]=STATS[year]||{};
-        o.rows.forEach(r=>{
-          const s=st[r.c]=st[r.c]||{dol:Array(12).fill(0),nef:Array(12).fill(0)};
-          if(/dolu/i.test(r.l))s.dol=r.m;
-          else if(/say|nəfər|istirah/i.test(r.l))s.nef=r.m;
-        });
-        return;
-      }
-      (BY_YEAR[year]=BY_YEAR[year]||[]).push({name:base,rows:o.rows});
+    if(!Array.isArray(ALL)||!ALL.length)throw new Error('Cədvəldə data tapılmadı');
+    BY_YEAR={};
+    ALL.forEach(sh=>{
+      const nm=String(sh.name||'').trim();
+      if(!/^(19|20)\d{2}$/.test(nm)||!sh.values)return;
+      const D=parseSheet(sh.values);
+      if(D.length)BY_YEAR[nm]=D;
     });
     YEARS=Object.keys(BY_YEAR).sort();
+    if(!YEARS.length)throw new Error('İl vərəqi tapılmadı (vərəq adı «2025» formatında olmalıdır)');
     box.style.display='none';
     buildYearBar();
-    // datası olan ən son ili seç
-    let pick=YEARS[YEARS.length-1];
-    for(let i=YEARS.length-1;i>=0;i--){
-      const D=BY_YEAR[YEARS[i]];
-      if(sumA(D.map(o=>sumA(getR(o,'1'))+sumA(getR(o,'2'))))>0){pick=YEARS[i];break;}
-    }
-    selectYear(pick);
+    selectYear(YEARS[YEARS.length-1]);
     const d=new Date();
     const f=document.querySelector('footer');
     if(f)f.innerHTML='Mənbə: Google Sheets (canlı) · Baxış tarixi: '
@@ -226,282 +261,271 @@ function selectYear(y){
   document.querySelector('main').innerHTML=MAIN_TEMPLATE;
   document.querySelector('nav').style.display='';
   const D=BY_YEAR[y];
-  setSub(y+'-ci il · Gəlir, xərc və əməliyyat nəticəsi (AZN) · '+D.length+' sanatoriya');
-  buildReport(D, y);
+  setSub(y+'-ci il · Gəlir, xərc və maliyyə nəticələri (AZN) · '+D.length+' sanatoriya');
+  buildReport(D,y);
+}
+
+function buildReport(DATA,YEAR){
+  document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
+    document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.page').forEach(x=>x.classList.remove('show'));
+    b.classList.add('active');
+    document.getElementById('p-'+b.dataset.p).classList.add('show');
+  });
+
+  const objs=DATA.map(S=>({name:S.name,
+    sat:sum(R(S,K.sat)),emx:sum(R(S,K.emx)),emg:sum(R(S,K.emg)),inz:sum(R(S,K.inz)),
+    gop:sum(Rpre(S,'DƏQİQLƏŞDİRİLMİŞ')),amort:sum(R(S,K.amort)),
+    vergi:sum(R(S,K.vergi)),xalis:sum(R(S,K.xalis))}));
+  const T={};['sat','emx','emg','inz','gop','amort','vergi','xalis'].forEach(k=>T[k]=sum(objs.map(o=>o[k])));
+
+  // KPI
+  document.getElementById('kpi').innerHTML=
+   '<div class="card"><div class="k">Satış (gəlirlər)</div><div class="v">'+fmt(T.sat)+' ₼</div><div class="d">'+DATA.length+' sanatoriya üzrə</div></div>'
+  +'<div class="card"><div class="k">Cəmi xərclər</div><div class="v">'+fmt(T.emx+T.inz)+' ₼</div><div class="d">Əməliyyat + inzibati</div></div>'
+  +'<div class="card '+(T.emg<0?'neg':'pos')+'"><div class="k">Əməliyyat mənfəəti</div><div class="v">'+fmt(T.emg)+' ₼</div><div class="d">Satış − əməliyyat xərcləri</div></div>'
+  +'<div class="card '+(T.gop<0?'neg':'pos')+'"><div class="k">GOP</div><div class="v">'+fmt(T.gop)+' ₼</div><div class="d">Ümumi əməliyyat mənfəəti</div></div>'
+  +'<div class="card '+(T.xalis<0?'neg':'pos')+'"><div class="k">Xalis mənfəət</div><div class="v">'+fmt(T.xalis)+' ₼</div><div class="d">Vergidən sonra</div></div>';
+
+  // İcmal cədvəli
+  {
+   let h='<thead><tr><th>Sanatoriya</th><th>Satış</th><th>Əməliyyat xərcləri</th><th>Əməliyyat mənfəəti</th><th>İnzibati xərclər</th><th>GOP</th><th>Amortizasiya</th><th>Xalis mənfəət</th><th>Rentabellik</th></tr></thead><tbody>';
+   objs.forEach(o=>{
+    h+='<tr><td>'+o.name+'</td><td>'+fmt(o.sat)+'</td><td>'+fmt(o.emx)+'</td><td'+cls(o.emg)+'>'+fmt(o.emg)+'</td>'
+     +'<td>'+fmt(o.inz)+'</td><td'+cls(o.gop)+'>'+fmt(o.gop)+'</td><td>'+fmt(o.amort)+'</td>'
+     +'<td'+cls(o.xalis)+'>'+fmt(o.xalis)+'</td><td'+cls(o.xalis)+'>'+(o.sat?(100*o.xalis/o.sat).toFixed(1)+'%':'—')+'</td></tr>';});
+   h+='<tr class="total"><td>CƏMİ</td><td>'+fmt(T.sat)+'</td><td>'+fmt(T.emx)+'</td><td'+cls(T.emg)+'>'+fmt(T.emg)+'</td>'
+    +'<td>'+fmt(T.inz)+'</td><td'+cls(T.gop)+'>'+fmt(T.gop)+'</td><td>'+fmt(T.amort)+'</td>'
+    +'<td'+cls(T.xalis)+'>'+fmt(T.xalis)+'</td><td'+cls(T.xalis)+'>'+(T.sat?(100*T.xalis/T.sat).toFixed(1)+'%':'—')+'</td></tr></tbody>';
+   document.getElementById('t-icmal').innerHTML=h;
+  }
+
+  // barlar
+  {
+   const box=document.getElementById('bars-netice');
+   const mx=Math.max(...objs.map(o=>Math.abs(o.xalis)),1);
+   [...objs].sort((a,b)=>b.xalis-a.xalis).forEach(o=>{
+    const w=Math.max(2,100*Math.abs(o.xalis)/mx);
+    box.insertAdjacentHTML('beforeend','<div class="bar-row"><div class="lbl">'+o.name+'</div><div class="trk"><div class="fill'+(o.xalis<0?' neg':'')+'" style="width:'+w+'%"></div></div><div class="val" style="color:'+(o.xalis<0?'var(--red)':'var(--green)')+'">'+fmt(o.xalis)+' ₼</div></div>');});
+  }
+
+  // analitik qeydlər
+  {
+   const best=[...objs].sort((a,b)=>b.xalis-a.xalis)[0];
+   const worst=[...objs].sort((a,b)=>a.xalis-b.xalis)[0];
+   const notes=[
+    'Konsolidə satış <b>'+fmt(T.sat)+' ₼</b>, cəmi xərclər <b>'+fmt(T.emx+T.inz)+' ₼</b>, xalis mənfəət <b>'+fmt(T.xalis)+' ₼</b> təşkil etmişdir.',
+    'Əməliyyat mənfəəti <b>'+fmt(T.emg)+' ₼</b> ('+(T.sat?(100*T.emg/T.sat).toFixed(1):0)+'%), GOP <b>'+fmt(T.gop)+' ₼</b> ('+(T.sat?(100*T.gop/T.sat).toFixed(1):0)+'%) səviyyəsindədir.',
+    'Ən yüksək xalis mənfəət: <b>'+(best?best.name:'—')+'</b> ('+fmt(best?best.xalis:0)+' ₼).',
+    'Ən aşağı nəticə: <b>'+(worst?worst.name:'—')+'</b> ('+fmt(worst?worst.xalis:0)+' ₼); zərərli sanatoriyalar üzrə ayrıca səmərəlilik təhlili tövsiyə olunur.',
+    'İnzibati xərclər cəmi xərclərin ~'+((T.emx+T.inz)?(100*T.inz/(T.emx+T.inz)).toFixed(0):0)+'%-ni təşkil edir.',
+    'Amortizasiya <b>'+fmt(T.amort)+' ₼</b>, hesablanmış mənfəət vergisi <b>'+fmt(T.vergi)+' ₼</b>-dir.'];
+   document.getElementById('notes').innerHTML=notes.map(n=>'<li>'+n+'</li>').join('');
+  }
+
+  // Dinamika
+  {
+   const sel=document.getElementById('sel-din');
+   sel.innerHTML='<option value="-1">Hamısı (konsolidə)</option>'+DATA.map((o,i)=>'<option value="'+i+'">'+o.name+'</option>').join('');
+   function renderDin(){
+    const D=(+sel.value>=0)?[DATA[+sel.value]]:DATA;
+    const agg=lab=>MONTHS.map((_,i)=>sum(D.map(S=>R(S,lab)[i])));
+    const aggP=pre=>MONTHS.map((_,i)=>sum(D.map(S=>Rpre(S,pre)[i])));
+    const rows=[['Satış',agg(K.sat),1],['Əməliyyat xərcləri',agg(K.emx),1],['Əməliyyat mənfəəti',agg(K.emg),1],
+      ['İnzibati xərclər',agg(K.inz),1],['GOP',aggP('DƏQİQLƏŞDİRİLMİŞ'),1],['Amortizasiya',agg(K.amort),0],
+      ['Bonus',agg(K.bonus),0],['Mənfəət vergisi',agg(K.vergi),0]];
+    let h='<thead><tr><th>Göstərici</th>'+MONTHS.map(m=>'<th>'+m+'</th>').join('')+'<th>Cəmi</th></tr></thead><tbody>';
+    rows.forEach(([lab,m,b])=>{
+     const sgn=['Əməliyyat mənfəəti','GOP'].includes(lab);
+     h+='<tr'+(b?' class="lvl0"':'')+'><td>'+(b?lab:'&nbsp;&nbsp;'+lab)+'</td>'+m.map(v=>'<td'+(sgn?cls(v):'')+'>'+fmt(v)+'</td>').join('')+'<td'+(sgn?cls(sum(m)):'')+'>'+fmt(sum(m))+'</td></tr>';});
+    const xn=agg(K.xalis);
+    h+='<tr class="total"><td>Xalis mənfəət</td>'+xn.map(v=>'<td'+cls(v)+'>'+fmt(v)+'</td>').join('')+'<td'+cls(sum(xn))+'>'+fmt(sum(xn))+'</td></tr></tbody>';
+    document.getElementById('t-dinamika').innerHTML=h;
+    const g=agg(K.sat),x=MONTHS.map((_,i)=>agg(K.emx)[i]+agg(K.inz)[i]);
+    const W=1100,H=240,P=40,mx=Math.max(...g,...x,1);
+    const pt=a=>a.map((v,i)=>(P+i*(W-2*P)/11)+','+(H-P-(H-2*P)*Math.max(v,0)/mx)).join(' ');
+    document.getElementById('spark').innerHTML='<h2 style="font-size:16px;margin:20px 0 8px">Aylıq satış və xərc trendi</h2>'
+     +'<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:1100px;background:var(--xlblue);border-radius:8px">'
+     +'<polyline points="'+pt(x)+'" fill="none" stroke="#9db8dd" stroke-width="2.5"/>'
+     +'<polyline points="'+pt(g)+'" fill="none" stroke="var(--blue)" stroke-width="2.5"/>'
+     +g.map((v,i)=>'<circle cx="'+(P+i*(W-2*P)/11)+'" cy="'+(H-P-(H-2*P)*Math.max(v,0)/mx)+'" r="3.5" fill="var(--blue)"/>').join('')
+     +MONTHS.map((m,i)=>'<text x="'+(P+i*(W-2*P)/11)+'" y="'+(H-14)+'" font-size="10" text-anchor="middle" fill="#5b6b82">'+m.slice(0,3)+'</text>').join('')
+     +'<text x="'+P+'" y="18" font-size="11" fill="var(--blue)" font-weight="700">— Satış</text>'
+     +'<text x="'+(P+70)+'" y="18" font-size="11" fill="#9db8dd" font-weight="700">— Cəmi xərclər</text></svg>';
+   }
+   sel.onchange=renderDin; renderDin();
+  }
+
+  // Sanatoriyalar üzrə xalis mənfəət
+  {
+   let h='<thead><tr><th>Sanatoriya</th>'+MONTHS.map(m=>'<th>'+m+'</th>').join('')+'<th>Cəmi</th></tr></thead><tbody>';
+   DATA.forEach(S=>{
+    const n=R(S,K.xalis);
+    h+='<tr><td>'+S.name+'</td>'+n.map(v=>'<td'+cls(v)+'>'+fmt(v)+'</td>').join('')+'<td'+cls(sum(n))+'>'+fmt(sum(n))+'</td></tr>';});
+   const tot=MONTHS.map((_,i)=>sum(DATA.map(S=>R(S,K.xalis)[i])));
+   h+='<tr class="total"><td>CƏMİ</td>'+tot.map(v=>'<td'+cls(v)+'>'+fmt(v)+'</td>').join('')+'<td'+cls(sum(tot))+'>'+fmt(sum(tot))+'</td></tr></tbody>';
+   document.getElementById('t-obyektler').innerHTML=h;
+  }
+
+  // Xərc strukturu: sətirlər = maddələr, sütunlar = sanatoriyalar
+  {
+   const emxItems=[...new Set([].concat(...DATA.map(S=>secRows(S,K.emx,STOPS).map(r=>r.l))))];
+   const inzItems=[...new Set([].concat(...DATA.map(S=>secRows(S,K.inz,STOPS).map(r=>r.l))))];
+   const val=(S,head,lab)=>{const r=secRows(S,head,STOPS).find(r=>r.l===lab);return r?sum(r.m):0;};
+   let h='<thead><tr><th>Xərc maddəsi</th>'+DATA.map(S=>'<th>'+S.name+'</th>').join('')+'<th>CƏMİ</th><th>Xüsusi çəki</th></tr></thead><tbody>';
+   const TXall=T.emx+T.inz;
+   const section=(title,head,items)=>{
+    const secTot=sum(DATA.map(S=>sum(R(S,head))));
+    h+='<tr class="lvl0"><td>'+title+'</td>'+DATA.map(S=>'<td>'+fmt(sum(R(S,head)))+'</td>').join('')+'<td>'+fmt(secTot)+'</td><td>'+(TXall?(100*secTot/TXall).toFixed(1)+'%':'—')+'</td></tr>';
+    items.forEach(lab=>{
+     const rowTot=sum(DATA.map(S=>val(S,head,lab)));
+     if(rowTot===0)return;
+     h+='<tr class="lvl1"><td>'+lab+'</td>'+DATA.map(S=>'<td>'+fmt(val(S,head,lab))+'</td>').join('')+'<td>'+fmt(rowTot)+'</td><td>'+(TXall?(100*rowTot/TXall).toFixed(1)+'%':'—')+'</td></tr>';});
+   };
+   section('ƏMƏLİYYAT XƏRCLƏRİ',K.emx,emxItems);
+   section('İNZİBATİ XƏRCLƏR',K.inz,inzItems);
+   h+='<tr class="total"><td>CƏMİ XƏRCLƏR</td>'+DATA.map(S=>'<td>'+fmt(sum(R(S,K.emx))+sum(R(S,K.inz)))+'</td>').join('')+'<td>'+fmt(TXall)+'</td><td>100%</td></tr></tbody>';
+   document.getElementById('t-xerc').innerHTML=h;
+   // barlar: bütün alt maddələr
+   const box=document.getElementById('bars-xerc');
+   const all=[];
+   emxItems.forEach(l=>all.push([l+' (əməl.)',sum(DATA.map(S=>val(S,K.emx,l)))]));
+   inzItems.forEach(l=>all.push([l+' (inzib.)',sum(DATA.map(S=>val(S,K.inz,l)))]));
+   const flt=all.filter(a=>a[1]>0).sort((a,b)=>b[1]-a[1]);
+   const mx=Math.max(...flt.map(a=>a[1]),1);
+   flt.forEach(([lab,v])=>{
+    box.insertAdjacentHTML('beforeend','<div class="bar-row"><div class="lbl">'+lab+'</div><div class="trk"><div class="fill" style="width:'+Math.max(2,100*v/mx)+'%"></div></div><div class="val">'+fmt(v)+' ₼ · '+(TXall?(100*v/TXall).toFixed(1):0)+'%</div></div>');});
+  }
+
+  // Detal
+  {
+   const sel=document.getElementById('sel-obj');
+   sel.innerHTML=DATA.map((o,i)=>'<option value="'+i+'">'+o.name+'</option>').join('');
+   const HEADS=['SATIŞ','ƏMƏLİYYAT XƏRCLƏRİ','İNZİBATİ XƏRCLƏR'];
+   const TOTALS=['Əməliyyat gəliri','FAİZ VƏ VERGİLƏRDƏN ƏVVƏL MƏNFƏƏT','XALİS MƏNFƏƏT'];
+   function render(){
+    const S=DATA[+sel.value];
+    document.getElementById('detal-tag').textContent=S.name;
+    const sat=sum(R(S,K.sat)),xer=sum(R(S,K.emx))+sum(R(S,K.inz)),gop=sum(Rpre(S,'DƏQİQLƏŞDİRİLMİŞ')),xn=sum(R(S,K.xalis));
+    document.getElementById('detal-kpi').innerHTML=
+     '<div class="card"><div class="k">Satış</div><div class="v">'+fmt(sat)+' ₼</div></div>'
+    +'<div class="card"><div class="k">Cəmi xərclər</div><div class="v">'+fmt(xer)+' ₼</div></div>'
+    +'<div class="card '+(gop<0?'neg':'pos')+'"><div class="k">GOP</div><div class="v">'+fmt(gop)+' ₼</div></div>'
+    +'<div class="card '+(xn<0?'neg':'pos')+'"><div class="k">Xalis mənfəət</div><div class="v">'+fmt(xn)+' ₼</div></div>'
+    +'<div class="card"><div class="k">Rentabellik</div><div class="v">'+(sat?(100*xn/sat).toFixed(1)+'%':'—')+'</div></div>';
+    const stIdx=S.rows.findIndex(r=>r.l.startsWith('STATISTIKA'));
+    const plRows=stIdx>=0?S.rows.slice(0,stIdx):S.rows;
+    let h='<thead><tr><th>Maddə</th>'+MONTHS.map(m=>'<th>'+m+'</th>').join('')+'<th>Cəmi</th></tr></thead><tbody>';
+    plRows.forEach(r=>{
+     const t=sum(r.m);
+     if(t===0&&!HEADS.includes(r.l))return;
+     const p=isPct(r.l);
+     const cellv=v=>p?fp(v):fmt(v);
+     const isTot=TOTALS.some(x=>r.l.startsWith(x))||r.l.startsWith('DƏQİQLƏŞDİRİLMİŞ');
+     const rc=isTot?' class="total"':(HEADS.includes(r.l)?' class="lvl0"':' class="lvl1"');
+     const sgn=isTot&&!p;
+     h+='<tr'+rc+'><td>'+r.l+'</td>'+r.m.map(v=>'<td'+(sgn?cls(v):'')+'>'+cellv(v)+'</td>').join('')
+      +'<td'+(sgn?cls(t):'')+'>'+(p?'—':fmt(t))+'</td></tr>';});
+    h+='</tbody>';
+    document.getElementById('t-detal').innerHTML=h;
+   }
+   sel.onchange=render;render();
+  }
+
+  // Statistika
+  {
+   const sel=document.getElementById('sel-stat');
+   if(sel){
+    sel.innerHTML=DATA.map((o,i)=>'<option value="'+i+'">'+o.name+'</option>').join('');
+    function renderStat(){
+     const S=DATA[+sel.value];
+     document.getElementById('stat-tag').textContent=S.name+' · '+YEAR;
+     const stIdx=S.rows.findIndex(r=>r.l.startsWith('STATISTIKA'));
+     const box=document.getElementById('stat-content');
+     if(stIdx<0){box.innerHTML='<div class="note">Bu vərəqdə statistika bölməsi tapılmadı.</div>';return;}
+     const rows=S.rows.slice(stIdx+1).filter(r=>sum(r.m)!==0);
+     let h='<div class="scroll"><table><thead><tr><th>Göstərici</th>'+MONTHS.map(m=>'<th>'+m+'</th>').join('')+'<th>Orta/Cəmi</th></tr></thead><tbody>';
+     rows.forEach(r=>{
+      const p=isPct(r.l);
+      const nz=r.m.filter(v=>v!==0);
+      const avgLike=p||/qiymət|ARR|RevPAR|başına|üzrə|Orta|%/.test(r.l);
+      const last=p?(nz.length?fp(sum(nz)/nz.length):'—'):(avgLike?(nz.length?fmt(sum(nz)/nz.length):'—'):fmt(sum(r.m)));
+      h+='<tr><td>'+r.l+'</td>'+r.m.map(v=>'<td>'+(v===0?'—':(p?fp(v):fmt(v)))+'</td>').join('')+'<td><b>'+last+'</b></td></tr>';});
+     h+='</tbody></table></div><div class="note" style="margin-top:8px">Faiz göstəriciləri mənbə cədvəldəki kimi, digərləri aylar üzrə; son sütunda orta (nisbi göstəricilər) və ya cəm (mütləq göstəricilər) verilir.</div>';
+     box.innerHTML=h;
+    }
+    sel.onchange=renderStat;renderStat();
+   }
+  }
 }
 
 function selectCompare(){
   markYear('__cmp');
   document.querySelector('nav').style.display='none';
-  const y1=YEARS[0], y2=YEARS[YEARS.length-1];
+  const y1=YEARS[0],y2=YEARS[YEARS.length-1];
   setSub(y1+'–'+y2+' illərarası müqayisə (AZN)');
-  const D1=BY_YEAR[y1], D2=BY_YEAR[y2];
-  const MONTHS=['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'];
-  const agg=(D,c)=>MONTHS.map((_,i)=>sumA(D.map(o=>getR(o,c)[i])));
-  const g1=agg(D1,'1'),x1=agg(D1,'2'),g2=agg(D2,'1'),x2=agg(D2,'2');
-  const TG1=sumA(g1),TX1=sumA(x1),TN1=TG1-TX1,TG2=sumA(g2),TX2=sumA(x2),TN2=TG2-TX2;
+  const D1=BY_YEAR[y1],D2=BY_YEAR[y2];
+  const agg=(D,lab)=>MONTHS.map((_,i)=>sum(D.map(S=>R(S,lab)[i])));
+  const g1=agg(D1,K.sat),g2=agg(D2,K.sat);
+  const x1=MONTHS.map((_,i)=>agg(D1,K.emx)[i]+agg(D1,K.inz)[i]),x2=MONTHS.map((_,i)=>agg(D2,K.emx)[i]+agg(D2,K.inz)[i]);
+  const n1=agg(D1,K.xalis),n2=agg(D2,K.xalis);
+  const TG1=sum(g1),TX1=sum(x1),TN1=sum(n1),TG2=sum(g2),TX2=sum(x2),TN2=sum(n2);
 
   let h='<section class="page show"><h2>İllərarası müqayisə: '+y1+' — '+y2+'</h2>'
    +'<div class="note">Konsolidə göstəricilər, aylar üzrə dinamika və sanatoriyalar üzrə illik dəyişim. Faizlər '+y1+' ilinə nəzərən hesablanıb.</div>';
-
   h+='<div class="cards">'
-   +'<div class="card"><div class="k">Gəlirlər '+y1+' → '+y2+'</div><div class="v">'+fmtN(TG1)+' → '+fmtN(TG2)+' ₼</div><div class="d">Dəyişim: <b'+pctCls(TG1,TG2)+'>'+pct(TG1,TG2)+'</b></div></div>'
-   +'<div class="card"><div class="k">Xərclər '+y1+' → '+y2+'</div><div class="v">'+fmtN(TX1)+' → '+fmtN(TX2)+' ₼</div><div class="d">Dəyişim: <b'+pctCls(TX2,TX1)+'>'+pct(TX1,TX2)+'</b></div></div>'
-   +'<div class="card '+(TN2<TN1?'neg':'pos')+'"><div class="k">Əməliyyat nəticəsi</div><div class="v">'+fmtN(TN1)+' → '+fmtN(TN2)+' ₼</div><div class="d">Fərq: '+fmtN(TN2-TN1)+' ₼</div></div></div>';
+   +'<div class="card"><div class="k">Satış '+y1+' → '+y2+'</div><div class="v">'+fmt(TG1)+' → '+fmt(TG2)+' ₼</div><div class="d">Dəyişim: <b'+pctCls(TG1,TG2)+'>'+pct(TG1,TG2)+'</b></div></div>'
+   +'<div class="card"><div class="k">Xərclər '+y1+' → '+y2+'</div><div class="v">'+fmt(TX1)+' → '+fmt(TX2)+' ₼</div><div class="d">Dəyişim: <b'+pctCls(TX2,TX1)+'>'+pct(TX1,TX2)+'</b></div></div>'
+   +'<div class="card '+(TN2<TN1?'neg':'pos')+'"><div class="k">Xalis mənfəət</div><div class="v">'+fmt(TN1)+' → '+fmt(TN2)+' ₼</div><div class="d">Fərq: '+fmt(TN2-TN1)+' ₼</div></div></div>';
 
   h+='<h2 style="font-size:17px">Aylar üzrə müqayisə</h2><div class="scroll"><table><thead><tr><th>Göstərici</th>'
    +MONTHS.map(m=>'<th>'+m+'</th>').join('')+'<th>Cəmi</th></tr></thead><tbody>';
-  const row=(lab,arr,tot,cl)=>'<tr'+(cl||'')+'><td>'+lab+'</td>'+arr.map(v=>'<td>'+fmtN(v)+'</td>').join('')+'<td>'+fmtN(tot)+'</td></tr>';
+  const row=(lab,arr,tot,cl)=>'<tr'+(cl||'')+'><td>'+lab+'</td>'+arr.map(v=>'<td>'+fmt(v)+'</td>').join('')+'<td>'+fmt(tot)+'</td></tr>';
   const rowP=(lab,a,b)=>'<tr><td style="color:var(--muted)">'+lab+'</td>'
    +MONTHS.map((_,i)=>'<td'+pctCls(a[i],b[i])+'>'+pct(a[i],b[i])+'</td>').join('')
-   +'<td'+pctCls(sumA(a),sumA(b))+'>'+pct(sumA(a),sumA(b))+'</td></tr>';
-  h+=row('Gəlirlər '+y1,g1,TG1,' class="lvl0"')+row('Gəlirlər '+y2,g2,TG2,' class="lvl0"')+rowP('Dəyişim %',g1,g2);
+   +'<td'+pctCls(sum(a),sum(b))+'>'+pct(sum(a),sum(b))+'</td></tr>';
+  h+=row('Satış '+y1,g1,TG1,' class="lvl0"')+row('Satış '+y2,g2,TG2,' class="lvl0"')+rowP('Dəyişim %',g1,g2);
   h+=row('Xərclər '+y1,x1,TX1,' class="lvl0"')+row('Xərclər '+y2,x2,TX2,' class="lvl0"')+rowP('Dəyişim %',x1,x2);
-  const n1=MONTHS.map((_,i)=>g1[i]-x1[i]),n2=MONTHS.map((_,i)=>g2[i]-x2[i]);
-  h+='<tr class="total"><td>Nəticə '+y1+'</td>'+n1.map(v=>'<td'+clsN(v)+'>'+fmtN(v)+'</td>').join('')+'<td'+clsN(TN1)+'>'+fmtN(TN1)+'</td></tr>';
-  h+='<tr class="total"><td>Nəticə '+y2+'</td>'+n2.map(v=>'<td'+clsN(v)+'>'+fmtN(v)+'</td>').join('')+'<td'+clsN(TN2)+'>'+fmtN(TN2)+'</td></tr>';
+  h+='<tr class="total"><td>Xalis mənfəət '+y1+'</td>'+n1.map(v=>'<td'+cls(v)+'>'+fmt(v)+'</td>').join('')+'<td'+cls(TN1)+'>'+fmt(TN1)+'</td></tr>';
+  h+='<tr class="total"><td>Xalis mənfəət '+y2+'</td>'+n2.map(v=>'<td'+cls(v)+'>'+fmt(v)+'</td>').join('')+'<td'+cls(TN2)+'>'+fmt(TN2)+'</td></tr>';
   h+='</tbody></table></div>';
 
   const W=1100,H=260,P=40,mx=Math.max(...g1,...g2,...x1,...x2,1);
-  const pt=a=>a.map((v,i)=>(P+i*(W-2*P)/11)+','+(H-P-(H-2*P)*v/mx)).join(' ');
-  h+='<h2 style="font-size:16px;margin:20px 0 8px">Aylıq gəlir və xərc trendi: '+y1+' və '+y2+'</h2>'
+  const pt=a=>a.map((v,i)=>(P+i*(W-2*P)/11)+','+(H-P-(H-2*P)*Math.max(v,0)/mx)).join(' ');
+  h+='<h2 style="font-size:16px;margin:20px 0 8px">Aylıq satış və xərc trendi: '+y1+' və '+y2+'</h2>'
    +'<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:1100px;background:var(--xlblue);border-radius:8px">'
    +'<polyline points="'+pt(g1)+'" fill="none" stroke="#9db8dd" stroke-width="2.5"/>'
    +'<polyline points="'+pt(g2)+'" fill="none" stroke="var(--blue)" stroke-width="2.5"/>'
    +'<polyline points="'+pt(x1)+'" fill="none" stroke="#e0b4b4" stroke-width="2" stroke-dasharray="5,4"/>'
    +'<polyline points="'+pt(x2)+'" fill="none" stroke="var(--red)" stroke-width="2" stroke-dasharray="5,4"/>'
    +MONTHS.map((m,i)=>'<text x="'+(P+i*(W-2*P)/11)+'" y="'+(H-14)+'" font-size="10" text-anchor="middle" fill="#5b6b82">'+m.slice(0,3)+'</text>').join('')
-   +'<text x="'+P+'" y="18" font-size="11" fill="#9db8dd" font-weight="700">— Gəlir '+y1+'</text>'
-   +'<text x="'+(P+110)+'" y="18" font-size="11" fill="var(--blue)" font-weight="700">— Gəlir '+y2+'</text>'
-   +'<text x="'+(P+220)+'" y="18" font-size="11" fill="#e0b4b4" font-weight="700">-- Xərc '+y1+'</text>'
-   +'<text x="'+(P+320)+'" y="18" font-size="11" fill="var(--red)" font-weight="700">-- Xərc '+y2+'</text></svg>';
+   +'<text x="'+P+'" y="18" font-size="11" fill="#9db8dd" font-weight="700">— Satış '+y1+'</text>'
+   +'<text x="'+(P+100)+'" y="18" font-size="11" fill="var(--blue)" font-weight="700">— Satış '+y2+'</text>'
+   +'<text x="'+(P+200)+'" y="18" font-size="11" fill="#e0b4b4" font-weight="700">-- Xərc '+y1+'</text>'
+   +'<text x="'+(P+290)+'" y="18" font-size="11" fill="var(--red)" font-weight="700">-- Xərc '+y2+'</text></svg>';
 
   const names=[...new Set([...D1.map(o=>o.name),...D2.map(o=>o.name)])];
   h+='<h2 style="font-size:17px;margin-top:24px">Sanatoriyalar üzrə illik müqayisə</h2><div class="scroll"><table><thead><tr>'
-   +'<th>Sanatoriya</th><th>Gəlir '+y1+'</th><th>Gəlir '+y2+'</th><th>Δ Gəlir</th><th>Xərc '+y1+'</th><th>Xərc '+y2+'</th><th>Δ Xərc</th><th>Nəticə '+y1+'</th><th>Nəticə '+y2+'</th><th>Δ Nəticə (₼)</th></tr></thead><tbody>';
+   +'<th>Sanatoriya</th><th>Satış '+y1+'</th><th>Satış '+y2+'</th><th>Δ Satış</th><th>Xərc '+y1+'</th><th>Xərc '+y2+'</th><th>Δ Xərc</th><th>Xalis mənfəət '+y1+'</th><th>Xalis mənfəət '+y2+'</th><th>Δ (₼)</th></tr></thead><tbody>';
   names.forEach(nm=>{
     const o1=D1.find(o=>o.name===nm),o2=D2.find(o=>o.name===nm);
-    const G1=o1?sumA(getR(o1,'1')):0,X1=o1?sumA(getR(o1,'2')):0;
-    const G2=o2?sumA(getR(o2,'1')):0,X2=o2?sumA(getR(o2,'2')):0;
-    const N1=G1-X1,N2=G2-X2;
+    const G1=o1?sum(R(o1,K.sat)):0,X1=o1?sum(R(o1,K.emx))+sum(R(o1,K.inz)):0,N1=o1?sum(R(o1,K.xalis)):0;
+    const G2=o2?sum(R(o2,K.sat)):0,X2=o2?sum(R(o2,K.emx))+sum(R(o2,K.inz)):0,N2=o2?sum(R(o2,K.xalis)):0;
     h+='<tr><td>'+nm+'</td>'
-     +'<td>'+fmtN(G1)+'</td><td>'+fmtN(G2)+'</td><td'+pctCls(G1,G2)+'>'+pct(G1,G2)+'</td>'
-     +'<td>'+fmtN(X1)+'</td><td>'+fmtN(X2)+'</td><td'+pctCls(X2,X1)+'>'+pct(X1,X2)+'</td>'
-     +'<td'+clsN(N1)+'>'+fmtN(N1)+'</td><td'+clsN(N2)+'>'+fmtN(N2)+'</td><td'+clsN(N2-N1)+'>'+fmtN(N2-N1)+'</td></tr>';
+     +'<td>'+fmt(G1)+'</td><td>'+fmt(G2)+'</td><td'+pctCls(G1,G2)+'>'+pct(G1,G2)+'</td>'
+     +'<td>'+fmt(X1)+'</td><td>'+fmt(X2)+'</td><td'+pctCls(X2,X1)+'>'+pct(X1,X2)+'</td>'
+     +'<td'+cls(N1)+'>'+fmt(N1)+'</td><td'+cls(N2)+'>'+fmt(N2)+'</td><td'+cls(N2-N1)+'>'+fmt(N2-N1)+'</td></tr>';
   });
-  h+='<tr class="total"><td>CƏMİ</td><td>'+fmtN(TG1)+'</td><td>'+fmtN(TG2)+'</td><td'+pctCls(TG1,TG2)+'>'+pct(TG1,TG2)+'</td>'
-   +'<td>'+fmtN(TX1)+'</td><td>'+fmtN(TX2)+'</td><td'+pctCls(TX2,TX1)+'>'+pct(TX1,TX2)+'</td>'
-   +'<td'+clsN(TN1)+'>'+fmtN(TN1)+'</td><td'+clsN(TN2)+'>'+fmtN(TN2)+'</td><td'+clsN(TN2-TN1)+'>'+fmtN(TN2-TN1)+'</td></tr>'
+  h+='<tr class="total"><td>CƏMİ</td><td>'+fmt(TG1)+'</td><td>'+fmt(TG2)+'</td><td'+pctCls(TG1,TG2)+'>'+pct(TG1,TG2)+'</td>'
+   +'<td>'+fmt(TX1)+'</td><td>'+fmt(TX2)+'</td><td'+pctCls(TX2,TX1)+'>'+pct(TX1,TX2)+'</td>'
+   +'<td'+cls(TN1)+'>'+fmt(TN1)+'</td><td'+cls(TN2)+'>'+fmt(TN2)+'</td><td'+cls(TN2-TN1)+'>'+fmt(TN2-TN1)+'</td></tr>'
    +'</tbody></table></div>'
-   +'<div class="note" style="margin-top:10px">Qeyd: cari ilin natamam olduğu dövrdə illik faizlər yalnız daxil edilmiş ayları əks etdirir; ay-ay cədvəl daha düzgün mənzərə verir.</div>'
+   +'<div class="note" style="margin-top:10px">Qeyd: cari ilin natamam olduğu dövrdə illik faizlər yalnız daxil edilmiş ayları əks etdirir.</div>'
    +'</section>';
 
   document.querySelector('main').innerHTML=h;
 }
 
-function renderStats(YEAR, DATA){
-  const box=document.getElementById('stat-content');
-  const tag=document.getElementById('stat-year');
-  if(tag)tag.textContent=YEAR;
-  const st=STATS[YEAR];
-  const MONTHS=['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'];
-  if(!st||!Object.keys(st).length){
-    box.innerHTML='<div class="note">Bu il üçün «Statistika '+YEAR+'» vərəqi hələ doldurulmayıb. Google Sheets-də doluluq və istirahətçi sayı daxil edildikdən sonra göstəricilər burada avtomatik görünəcək.</div>';
-    return;
-  }
-  const names=Object.keys(st);
-  let h='';
-  // Doluluq
-  h+='<h2 style="font-size:17px">Doluluq (%)</h2><div class="scroll"><table><thead><tr><th>Sanatoriya</th>'
-   +MONTHS.map(m=>'<th>'+m+'</th>').join('')+'<th>Orta</th></tr></thead><tbody>';
-  names.forEach(nm=>{
-    const d=st[nm].dol, nz=d.filter(v=>v>0);
-    const avg=nz.length?(sumA(nz)/nz.length):0;
-    h+='<tr><td>'+nm+'</td>'+d.map(v=>'<td>'+(v?v.toFixed(1)+'%':'—')+'</td>').join('')
-     +'<td><b>'+(avg?avg.toFixed(1)+'%':'—')+'</b></td></tr>';
-  });
-  h+='</tbody></table></div>';
-  // İstirahətçi sayı
-  h+='<h2 style="font-size:17px;margin-top:22px">İstirahətçilərin sayı (nəfər)</h2><div class="scroll"><table><thead><tr><th>Sanatoriya</th>'
-   +MONTHS.map(m=>'<th>'+m+'</th>').join('')+'<th>Cəmi</th></tr></thead><tbody>';
-  let totNef=Array(12).fill(0);
-  names.forEach(nm=>{
-    const n=st[nm].nef;
-    n.forEach((v,i)=>totNef[i]+=v);
-    h+='<tr><td>'+nm+'</td>'+n.map(v=>'<td>'+(v?fmtN(v):'—')+'</td>').join('')+'<td><b>'+fmtN(sumA(n))+'</b></td></tr>';
-  });
-  h+='<tr class="total"><td>CƏMİ</td>'+totNef.map(v=>'<td>'+(v?fmtN(v):'—')+'</td>').join('')+'<td>'+fmtN(sumA(totNef))+'</td></tr></tbody></table></div>';
-  // Adam başına maya dəyəri
-  h+='<h2 style="font-size:17px;margin-top:22px">Adam başına maya dəyəri (₼/nəfər)</h2>'
-   +'<div class="note">Aylıq xərclər ÷ istirahətçi sayı. İllik göstərici: illik xərc ÷ illik istirahətçi sayı.</div>'
-   +'<div class="scroll"><table><thead><tr><th>Sanatoriya</th>'
-   +MONTHS.map(m=>'<th>'+m+'</th>').join('')+'<th>İllik</th></tr></thead><tbody>';
-  names.forEach(nm=>{
-    const o=DATA.find(o=>o.name===nm);
-    if(!o)return;
-    const x=getR(o,'2'), n=st[nm].nef;
-    h+='<tr><td>'+nm+'</td>'+MONTHS.map((_,i)=>'<td>'+(n[i]>0?fmtN(x[i]/n[i]):'—')+'</td>').join('')
-     +'<td><b>'+(sumA(n)>0?fmtN(sumA(x)/sumA(n)):'—')+'</b></td></tr>';
-  });
-  h+='</tbody></table></div>';
-  box.innerHTML=h;
-}
-
-function buildReport(DATA, YEAR){
-
-const MONTHS=['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr'];
-const fmt=v=>v==null?'—':Math.round(v).toLocaleString('az-AZ').replace(/,/g,' ');
-const sum=a=>a.reduce((x,y)=>x+y,0);
-const get=(o,c)=>{const r=o.rows.find(r=>r.c===c);return r?r.m:Array(12).fill(0)};
-const cls=v=>v<0?' class="neg"':(v>0?' class="pos"':'');
-
-// nav
-document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('show'));
-  b.classList.add('active');
-  document.getElementById('p-'+b.dataset.p).classList.add('show');
-});
-
-// derived
-const objs=DATA.map(o=>{
-  const g=sum(get(o,'1')),x=sum(get(o,'2'));
-  return {name:o.name,g,x,n:g-x,
-    yol:sum(get(o,'1.1')),yer:sum(get(o,'1.2')),dig:sum(get(o,'1.3')),
-    eh:sum(get(o,'2.2.1'))+sum(get(o,'2.1.1')),kom:sum(get(o,'2.2.2'))+sum(get(o,'2.1.2'))};
-});
-const TG=sum(objs.map(o=>o.g)),TX=sum(objs.map(o=>o.x)),TN=TG-TX;
-const aparat=objs.find(o=>o.name.includes('QSC'));
-const sansN=TN-(aparat?aparat.n:0);
-
-// KPI cards
-document.getElementById('kpi').innerHTML=`
- <div class="card"><div class="k">Ümumi gəlirlər</div><div class="v">${fmt(TG)} ₼</div><div class="d">${DATA.length} sanatoriya üzrə</div></div>
- <div class="card"><div class="k">Ümumi xərclər</div><div class="v">${fmt(TX)} ₼</div><div class="d">Aparat daxil</div></div>
- <div class="card ${TN<0?'neg':'pos'}"><div class="k">Əməliyyat nəticəsi</div><div class="v">${fmt(TN)} ₼</div><div class="d">Konsolidə</div></div>
- <div class="card ${sansN<0?'neg':'pos'}"><div class="k">Nəticə (Aparat istisna)</div><div class="v">${fmt(sansN)} ₼</div><div class="d">Yalnız sanatoriyalar</div></div>`;
-
-// İcmal table
-{
- let h='<thead><tr><th>Sanatoriya</th><th>Gəlirlər</th><th>Yollayış</th><th>Yerində satış</th><th>Digər</th><th>Xərclər</th><th>Nəticə</th><th>Rentabellik</th><th>Gəlirdə payı</th></tr></thead><tbody>';
- objs.forEach(o=>{
-  h+=`<tr><td>${o.name}</td><td>${fmt(o.g)}</td><td>${fmt(o.yol)}</td><td>${fmt(o.yer)}</td><td>${fmt(o.dig)}</td><td>${fmt(o.x)}</td><td${cls(o.n)}>${fmt(o.n)}</td><td${cls(o.n)}>${o.g?(100*o.n/o.g).toFixed(1)+'%':'—'}</td><td>${(100*o.g/TG).toFixed(1)}%</td></tr>`;});
- h+=`<tr class="total"><td>CƏMİ</td><td>${fmt(TG)}</td><td>${fmt(sum(objs.map(o=>o.yol)))}</td><td>${fmt(sum(objs.map(o=>o.yer)))}</td><td>${fmt(sum(objs.map(o=>o.dig)))}</td><td>${fmt(TX)}</td><td${cls(TN)}>${fmt(TN)}</td><td${cls(TN)}>${(100*TN/TG).toFixed(1)}%</td><td>100%</td></tr></tbody>`;
- document.getElementById('t-icmal').innerHTML=h;
-}
-
-// bars: nəticə
-{
- const box=document.getElementById('bars-netice');
- const mx=Math.max(...objs.map(o=>Math.abs(o.n)));
- [...objs].sort((a,b)=>b.n-a.n).forEach(o=>{
-  const w=Math.max(2,100*Math.abs(o.n)/mx);
-  box.insertAdjacentHTML('beforeend',`<div class="bar-row"><div class="lbl">${o.name}</div><div class="trk"><div class="fill${o.n<0?' neg':''}" style="width:${w}%"></div></div><div class="val" style="color:${o.n<0?'var(--red)':'var(--green)'}">${fmt(o.n)} ₼</div></div>`);});
-}
-
-// notes
-{
- const best=[...objs].sort((a,b)=>b.n-a.n)[0];
- const worst=[...objs].filter(o=>!o.name.includes('QSC')).sort((a,b)=>a.n-b.n)[0];
- const notes=[
-  `Konsolidə gəlirlər <b>${fmt(TG)} ₼</b>, xərclər <b>${fmt(TX)} ₼</b> təşkil etmiş, ümumi əməliyyat nəticəsi <b>${fmt(TN)} ₼</b> olmuşdur.`,
-  `Mənfi nəticənin əsas amili baş ofisin («Kurort» QSC Aparat) <b>${fmt(aparat.x)} ₼</b> inzibati xərcidir; sanatoriyalar üzrə məcmu nəticə <b>müsbət ${fmt(sansN)} ₼</b>-dir.`,
-  `Ən yüksək nəticə: <b>${best.name}</b> (+${fmt(best.n)} ₼). Bilgəh və Şıx birlikdə müsbət nəticənin əsas mənbəyidir.`,
-  `Ən problemli sanatoriya: <b>${worst.name}</b> (${fmt(worst.n)} ₼). Zərərli sanatoriyalər üzrə ayrıca səmərəlilik təhlili tövsiyə olunur.`,
-  `Gəlir strukturunda yollayış satışı dominantdır (~${(100*sum(objs.map(o=>o.yol))/TG).toFixed(0)}%); qalan hissə yerində satış və digər gəlirlərdir.`,
-  `Xərc strukturunda əmək haqqı və sosial sığorta əsas maddədir (~${(100*sum(objs.map(o=>o.eh))/TX).toFixed(0)}%); xərclərə nəzarət prioriteti bu istiqamətdədir.`];
- document.getElementById('notes').innerHTML=notes.map(n=>`<li>${n}</li>`).join('');
-}
-
-// Dinamika
-{
- const rows=[['Gəlirlər','1',1],['Yollayış üzrə','1.1',0],['Yerində satış','1.2',0],['Digər gəlirlər','1.3',0],['Xərclər','2',1]];
- let h='<thead><tr><th>Göstərici</th>'+MONTHS.map(m=>`<th>${m}</th>`).join('')+'<th>Cəmi</th></tr></thead><tbody>';
- const agg=c=>MONTHS.map((_,i)=>sum(DATA.map(o=>get(o,c)[i])));
- rows.forEach(([lab,c,b])=>{
-  const m=agg(c);
-  h+=`<tr${b?' class="lvl0"':''}><td>${b?lab:'&nbsp;&nbsp;'+lab}</td>${m.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(sum(m))}</td></tr>`;});
- const g=agg('1'),x=agg('2');
- h+=`<tr class="total"><td>Əməliyyat nəticəsi</td>${MONTHS.map((_,i)=>`<td${cls(g[i]-x[i])}>${fmt(g[i]-x[i])}</td>`).join('')}<td${cls(TN)}>${fmt(TN)}</td></tr></tbody>`;
- document.getElementById('t-dinamika').innerHTML=h;
- // simple SVG line
- const W=1100,H=240,P=40;
- const mx=Math.max(...g,...x);
- const pt=a=>a.map((v,i)=>`${P+i*(W-2*P)/11},${H-P-(H-2*P)*v/mx}`).join(' ');
- document.getElementById('spark').innerHTML=`<h2 style="font-size:15px;margin:20px 0 8px">Aylıq gəlir və xərc trendi</h2>
- <svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:1100px;background:var(--xlblue);border-radius:8px">
-  <polyline points="${pt(x)}" fill="none" stroke="#9db8dd" stroke-width="2.5"/>
-  <polyline points="${pt(g)}" fill="none" stroke="var(--blue)" stroke-width="2.5"/>
-  ${g.map((v,i)=>`<circle cx="${P+i*(W-2*P)/11}" cy="${H-P-(H-2*P)*v/mx}" r="3.5" fill="var(--blue)"/>`).join('')}
-  ${MONTHS.map((m,i)=>`<text x="${P+i*(W-2*P)/11}" y="${H-14}" font-size="10" text-anchor="middle" fill="#5b6b82">${m.slice(0,3)}</text>`).join('')}
-  <text x="${P}" y="18" font-size="11" fill="var(--blue)" font-weight="700">— Gəlirlər</text>
-  <text x="${P+90}" y="18" font-size="11" fill="#9db8dd" font-weight="700">— Xərclər</text>
- </svg>`;
-}
-
-// Sanatoriyalər
-{
- let h='<thead><tr><th>Sanatoriya</th>'+MONTHS.map(m=>`<th>${m}</th>`).join('')+'<th>Cəmi</th></tr></thead><tbody>';
- DATA.forEach(o=>{
-  const g=get(o,'1'),x=get(o,'2');
-  const n=MONTHS.map((_,i)=>g[i]-x[i]);
-  h+=`<tr><td>${o.name}</td>${n.map(v=>`<td${cls(v)}>${fmt(v)}</td>`).join('')}<td${cls(sum(n))}>${fmt(sum(n))}</td></tr>`;});
- const tot=MONTHS.map((_,i)=>sum(DATA.map(o=>get(o,'1')[i]-get(o,'2')[i])));
- h+=`<tr class="total"><td>CƏMİ</td>${tot.map(v=>`<td${cls(v)}>${fmt(v)}</td>`).join('')}<td${cls(TN)}>${fmt(TN)}</td></tr></tbody>`;
- document.getElementById('t-sanatoriyaler').innerHTML=h;
-}
-
-// Xərc strukturu
-{
- const cats=[['Əmək haqqı (sos. sığorta ilə)',['2.2.1','2.1.1']],['Kommunal xərclər',['2.2.2','2.1.2']],
-  ['Ərzaq',['2.2.3.1','2.1.3.1']],['Təsərrüfat',['2.2.3.3','2.1.3.3']],['Cari təmir',['2.2.3.4','2.1.3.4']],
-  ['Amortizasiya',['2.2.3.5','2.1.3.5']],['Sair və digər',null]];
- let h='<thead><tr><th>Sanatoriya</th>'+cats.map(c=>`<th>${c[0]}</th>`).join('')+'<th>Cəmi</th></tr></thead><tbody>';
- const totals=Array(cats.length).fill(0);
- DATA.forEach(o=>{
-  const total=sum(get(o,'2'));let acc=0;
-  const vals=cats.map(([_,cl],j)=>{
-   let v;
-   if(cl===null)v=total-acc;else{v=cl.reduce((s,c)=>s+sum(get(o,c)),0);acc+=v;}
-   totals[j]+=v;return v;});
-  h+=`<tr><td>${o.name}</td>${vals.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(total)}</td></tr>`;});
- h+=`<tr class="total"><td>CƏMİ</td>${totals.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(TX)}</td></tr>`;
- h+=`<tr class="total"><td>Xüsusi çəki</td>${totals.map(v=>`<td>${(100*v/TX).toFixed(1)}%</td>`).join('')}<td>100%</td></tr></tbody>`;
- document.getElementById('t-xerc').innerHTML=h;
- const box=document.getElementById('bars-xerc');
- const mx=Math.max(...totals);
- cats.forEach(([lab],j)=>{
-  box.insertAdjacentHTML('beforeend',`<div class="bar-row"><div class="lbl">${lab}</div><div class="trk"><div class="fill" style="width:${Math.max(2,100*totals[j]/mx)}%"></div></div><div class="val">${fmt(totals[j])} ₼ · ${(100*totals[j]/TX).toFixed(1)}%</div></div>`);});
-}
-
-// Detal
-{
- const sel=document.getElementById('sel-obj');
- DATA.forEach((o,i)=>sel.insertAdjacentHTML('beforeend',`<option value="${i}">${o.name}</option>`));
- const chk=document.getElementById('chk-zero');
- function render(){
-  const o=DATA[+sel.value];
-  document.getElementById('detal-tag').textContent=o.name;
-  const g=sum(get(o,'1')),x=sum(get(o,'2')),n=g-x;
-  document.getElementById('detal-kpi').innerHTML=`
-   <div class="card"><div class="k">Gəlirlər</div><div class="v">${fmt(g)} ₼</div></div>
-   <div class="card"><div class="k">Xərclər</div><div class="v">${fmt(x)} ₼</div></div>
-   <div class="card ${n<0?'neg':'pos'}"><div class="k">Əməliyyat nəticəsi</div><div class="v">${fmt(n)} ₼</div></div>
-   <div class="card"><div class="k">Rentabellik</div><div class="v">${g?(100*n/g).toFixed(1)+'%':'—'}</div></div>`;
-  let h='<thead><tr><th>Kod</th><th>Maddə</th>'+MONTHS.map(m=>`<th>${m}</th>`).join('')+'<th>Cəmi</th></tr></thead><tbody>';
-  o.rows.forEach(r=>{
-   const t=sum(r.m),d=(r.c.match(/\./g)||[]).length;
-   if(!chk.checked&&t===0&&d>=1)return;
-   h+=`<tr class="lvl${Math.min(d,3)}"><td>${r.c}</td><td>${r.l}</td>${r.m.map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(t)}</td></tr>`;});
-  const gm=get(o,'1'),xm=get(o,'2');
-  h+=`<tr class="total"><td></td><td>Əməliyyat nəticəsi</td>${MONTHS.map((_,i)=>`<td${cls(gm[i]-xm[i])}>${fmt(gm[i]-xm[i])}</td>`).join('')}<td${cls(n)}>${fmt(n)}</td></tr></tbody>`;
-  document.getElementById('t-detal').innerHTML=h;
- }
- sel.onchange=render;chk.onchange=render;render();
-}
-
-renderStats(YEAR, DATA);
-}
 document.addEventListener('DOMContentLoaded',()=>{
   const main=document.querySelector('main');
   MAIN_TEMPLATE=main.innerHTML;
