@@ -685,7 +685,7 @@ function selectCompare(mode){
   let h='<section class="page show">';
   // rejim düymələri
   h+='<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:16px">';
-  [['aylar','Aylar üzrə'],['dovr','Dövr üzrə ('+M2.length+' ay)'],['illik','İllər üzrə'],['madde','Maddələr üzrə'],['arayis','Statistik arayış']].forEach(([m,lab])=>{
+  [['aylar','Aylar üzrə (Gəlir/xərc)'],['dovr','Dövr üzrə ('+M2.length+' ay)'],['illik','İllər üzrə'],['madde','Maddələr üzrə'],['arayis','Statistik arayış']].forEach(([m,lab])=>{
    h+='<button onclick="selectCompare(\''+m+'\')" style="padding:8px 20px;border-radius:20px;cursor:pointer;font-weight:700;font-size:13.5px;border:1px solid var(--blue);'
     +(mode===m?'background:var(--blue);color:#fff':'background:#fff;color:var(--blue)')+'">'+lab+'</button>';});
   h+='</div>';
